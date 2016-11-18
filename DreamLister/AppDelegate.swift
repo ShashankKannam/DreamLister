@@ -13,6 +13,10 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    
+    
+   
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -89,5 +93,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
-}
+     }
+let appdelegateShared = UIApplication.shared.delegate as? AppDelegate
+let context = appdelegateShared?.persistentContainer.viewContext
 
