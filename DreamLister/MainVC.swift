@@ -24,10 +24,11 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFe
     func attemptFetch(){
         
         
+        
         let dateSort = NSSortDescriptor(key: "created", ascending: false)
         let priceSort = NSSortDescriptor(key: "price", ascending: true)
         let titleSort = NSSortDescriptor(key: "title", ascending: true)
-        let typeSort = NSSortDescriptor(key: "itemType", ascending: true)
+        let typeSort = NSSortDescriptor(key: "toItemType.itemType", ascending: true)
         
         if segmentControl.selectedSegmentIndex==0{
           fetchRequest.sortDescriptors = [dateSort]
@@ -42,28 +43,13 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFe
             sort()
         }
         if segmentControl.selectedSegmentIndex==3{
-            
-             var nsFetchController1:NSFetchedResultsController<ItemType>!
-            let fetchRequest1:NSFetchRequest = ItemType.fetchRequest()
 
-            fetchRequest1.sortDescriptors = [typeSort]
-            
-            nsFetchController1 = NSFetchedResultsController(fetchRequest: fetchRequest1, managedObjectContext: context!, sectionNameKeyPath: nil, cacheName: nil)
-            
-            nsFetchController1.delegate=self
-            //self.nsFetchController = nsFetchController
-            
-            do{
-                try nsFetchController1.performFetch()
-            }
-            catch{
-                let error = error as NSError
-                print(error.debugDescription)
-            }
-        }
-        
+            fetchRequest.sortDescriptors = [typeSort]
+            sort()
        
     }
+    }
+    
     
     func sort(){
         nsFetchController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context!, sectionNameKeyPath: nil, cacheName: nil)
